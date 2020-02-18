@@ -1,0 +1,466 @@
+[1] "Start.."
+[1] "Script: loadData.R"
+[1] "2019-04-25 11:02:11 CEST"
+[1] "Reading JSON files..."
+[1] "2019-04-25 11:02:11 CEST"
+[1] "Loading 1..."
+[1] "Loading 1... OK"
+[1] "Loading 2..."
+[1] "Loading 2... OK"
+[1] "Loading 3..."
+[1] "Loading 3... OK"
+[1] "Loading 4..."
+[1] "Loading 4... OK"
+[1] "Loading 5..."
+[1] "Loading 5... OK"
+[1] "Loading 6..."
+[1] "Loading 6... OK"
+[1] "Loading 7..."
+[1] "Loading 7... OK"
+[1] "Loading 8..."
+[1] "Loading 8... OK"
+[1] "Loading 9..."
+[1] "Loading 9... OK"
+[1] "Loading 10..."
+[1] "Loading 10... OK"
+[1] "Loading 11..."
+[1] "Loading 11... OK"
+[1] "Loading 12..."
+[1] "Loading 12... OK"
+[1] "Loading 13..."
+[1] "Loading 13... OK"
+[1] "Loading 14..."
+[1] "Loading 14... OK"
+[1] "Loading 15..."
+[1] "Loading 15... OK"
+[1] "Loading 16..."
+[1] "Loading 16... OK"
+[1] "Reading JSON files Ok"
+[1] "2019-04-25 11:06:39 CEST"
+[1] "Generating dataSource...."
+[1] "Join All Data"
+[1] "Join All Data OK"
+[1] "Columns and Duplicates "
+[1] 7961640
+
+  FALSE    TRUE 
+1084532 6877108 
+[1] "Deleting Duplicate Data"
+[1] "***********************************"
+[1] "***********************************"
+[1] "Type of DataSource"
+[1] "list"
+[1] "Number of rows"
+[1] 1084532
+[1] "Number of columns"
+[1] 10
+[1] "Structure"
+'data.frame':	1084532 obs. of  10 variables:
+ $ dspId  : int  152 152 152 152 152 152 152 152 152 152 ...
+ $ dspLat : num  -0.198 -0.198 -0.198 -0.198 -0.199 ...
+ $ dspLong: num  -78.5 -78.5 -78.5 -78.5 -78.5 ...
+ $ dspNSat: int  25 25 25 24 25 25 24 25 25 23 ...
+ $ dspAlti: num  2868 2868 2868 2868 NA ...
+ $ dspVelo: num  0 0 0 0 0 0.6 0 0 0 0 ...
+ $ dspActy: int  2 2 2 2 NA NA NA NA NA 4 ...
+ $ dspAccu: num  1.67 1.67 1.67 1.67 1.67 ...
+ $ dspFcIn: chr  "2019-01-21 11:48:27" "2019-01-21 11:48:35" "2019-01-21 11:48:43" "2019-01-21 11:48:50" ...
+ $ dspFcUp: chr  "2019-01-21 11:48:27" "2019-01-21 11:48:35" "2019-01-21 11:49:05" "2019-01-21 11:49:39" ...
+NULL
+[1] "Summary"
+     dspId            dspLat            dspLong            dspNSat     
+ Min.   : 152.0   Min.   :-34.6895   Min.   :-122.427   Min.   : 0.00  
+ 1st Qu.: 308.0   1st Qu.: -0.2916   1st Qu.: -78.530   1st Qu.:14.00  
+ Median : 602.0   Median : -0.2139   Median : -78.503   Median :20.00  
+ Mean   : 576.1   Mean   :  0.3873   Mean   : -77.175   Mean   :18.73  
+ 3rd Qu.: 780.0   3rd Qu.: -0.1738   3rd Qu.: -78.484   3rd Qu.:22.00  
+ Max.   :1031.0   Max.   : 52.3054   Max.   :   5.596   Max.   :37.00  
+                  NA's   :371        NA's   :371        NA's   :83884  
+    dspAlti          dspVelo            dspActy          dspAccu     
+ Min.   :-178     Min.   :  0.0000   Min.   :0.00     Min.   :1.33   
+ 1st Qu.:2645     1st Qu.:  0.0000   1st Qu.:2.00     1st Qu.:1.67   
+ Median :2836     Median :  0.4169   Median :3.00     Median :1.67   
+ Mean   :2592     Mean   :  1.9894   Mean   :2.51     Mean   :1.68   
+ 3rd Qu.:2888     3rd Qu.:  1.3578   3rd Qu.:3.00     3rd Qu.:1.67   
+ Max.   :5136     Max.   :128.8626   Max.   :6.00     Max.   :4.00   
+ NA's   :160462   NA's   :372        NA's   :132414   NA's   :83883  
+   dspFcIn            dspFcUp         
+ Length:1084532     Length:1084532    
+ Class :character   Class :character  
+ Mode  :character   Mode  :character  
+                                      
+                                      
+                                      
+                                      
+[1] "Summary Missing Data"
+
+ Missings per variable: 
+ Variable  Count
+    dspId      0
+   dspLat    371
+  dspLong    371
+  dspNSat  83884
+  dspAlti 160462
+  dspVelo    372
+  dspActy 132414
+  dspAccu  83883
+  dspFcIn  19517
+  dspFcUp   7376
+
+ Missings in combinations of variables: 
+        Combinations  Count      Percent
+ 0:0:0:0:0:0:0:0:0:0 778282 7.176201e+01
+ 0:0:0:0:0:0:1:0:0:0  78416 7.230400e+00
+ 0:0:0:0:1:0:0:0:0:0  99839 9.205722e+00
+ 0:0:0:0:1:0:1:0:0:0  25115 2.315745e+00
+ 0:0:0:0:1:0:1:0:1:0  11765 1.084800e+00
+ 0:0:0:0:1:0:1:0:1:1   7223 6.660016e-01
+ 0:0:0:1:0:0:0:0:0:0      1 9.220567e-05
+ 0:0:0:1:0:0:0:1:0:0  60656 5.592827e+00
+ 0:0:0:1:0:0:1:1:0:0   6418 5.917760e-01
+ 0:0:0:1:0:1:0:1:0:0      1 9.220567e-05
+ 0:0:0:1:1:0:0:1:0:0  12995 1.198213e+00
+ 0:0:0:1:1:0:1:1:0:0   2922 2.694250e-01
+ 0:0:0:1:1:0:1:1:0:1      1 9.220567e-05
+ 0:0:0:1:1:0:1:1:1:0    375 3.457713e-02
+ 0:0:0:1:1:0:1:1:1:1    152 1.401526e-02
+ 0:1:1:0:0:1:0:0:0:0      8 7.376454e-04
+ 0:1:1:1:0:1:0:1:0:0    278 2.563318e-02
+ 0:1:1:1:0:1:1:1:0:0     10 9.220567e-04
+ 0:1:1:1:1:1:0:1:0:0     58 5.347929e-03
+ 0:1:1:1:1:1:1:1:0:0     15 1.383085e-03
+ 0:1:1:1:1:1:1:1:1:0      2 1.844113e-04
+[1] "***********************************"
+[1] "***********************************"
+[1] "Data01-SourceData.png 2019-04-25 11:09:09"
+
+ Variables sorted by number of missings: 
+ Variable        Count
+  dspAlti 0.1479550626
+  dspActy 0.1220932162
+  dspNSat 0.0773458045
+  dspAccu 0.0773448824
+  dspFcIn 0.0179957807
+  dspFcUp 0.0068010902
+  dspVelo 0.0003430051
+   dspLat 0.0003420830
+  dspLong 0.0003420830
+    dspId 0.0000000000
+[1] "Cleaning dataSource.."
+[1] "Delete rows with NAs in Latitude"
+[1] "Coordinates range of Quito"
+[1] "Assign the mean to the Missing Data"
+[1] "Updating Activity based on rules"
+[1] "Data02-CleaningData.png 2019-04-25 11:09:56"
+
+ Variables sorted by number of missings: 
+ Variable       Count
+  dspActy 0.006726615
+  dspFcIn 0.006726615
+  dspFcUp 0.006726615
+    dspId 0.000000000
+   dspLat 0.000000000
+  dspLong 0.000000000
+  dspNSat 0.000000000
+  dspAlti 0.000000000
+  dspVelo 0.000000000
+  dspAccu 0.000000000
+[1] "***********************************"
+[1] "***********************************"
+[1] "DataClean"
+[1] "Number of rows"
+[1] 993070
+[1] "Number of columns"
+[1] 10
+[1] "Structure"
+'data.frame':	993070 obs. of  10 variables:
+ $ dspId  : int  152 152 152 152 152 152 152 152 152 152 ...
+ $ dspLat : num  -0.198 -0.198 -0.198 -0.198 -0.199 ...
+ $ dspLong: num  -78.5 -78.5 -78.5 -78.5 -78.5 ...
+ $ dspNSat: int  25 25 25 24 25 25 24 25 25 23 ...
+ $ dspAlti: num  2868 2868 2868 2868 2634 ...
+ $ dspVelo: num  0 0 0 0 0 0.6 0 0 0 0 ...
+ $ dspActy: int  2 2 2 2 2 NA 3 2 3 4 ...
+ $ dspAccu: num  1.67 1.67 1.67 1.67 1.67 ...
+ $ dspFcIn: chr  "2019-01-21 11:48:27" "2019-01-21 11:48:35" "2019-01-21 11:48:43" "2019-01-21 11:48:50" ...
+ $ dspFcUp: chr  "2019-01-21 11:48:27" "2019-01-21 11:48:35" "2019-01-21 11:49:05" "2019-01-21 11:49:39" ...
+NULL
+[1] "Summary"
+     dspId          dspLat            dspLong          dspNSat     
+ Min.   : 152   Min.   :-0.40026   Min.   :-78.59   Min.   : 0.00  
+ 1st Qu.: 300   1st Qu.:-0.26877   1st Qu.:-78.52   1st Qu.:15.00  
+ Median : 590   Median :-0.20817   Median :-78.50   Median :19.00  
+ Mean   : 560   Mean   :-0.21793   Mean   :-78.50   Mean   :18.52  
+ 3rd Qu.: 765   3rd Qu.:-0.17376   3rd Qu.:-78.48   3rd Qu.:22.00  
+ Max.   :1031   Max.   : 0.02663   Max.   :-78.27   Max.   :37.00  
+                                                                   
+    dspAlti        dspVelo           dspActy         dspAccu     
+ Min.   :-178   Min.   :  0.000   Min.   :0.000   Min.   :1.333  
+ 1st Qu.:2634   1st Qu.:  0.000   1st Qu.:2.000   1st Qu.:1.667  
+ Median :2819   Median :  0.400   Median :3.000   Median :1.667  
+ Mean   :2634   Mean   :  1.754   Mean   :2.509   Mean   :1.680  
+ 3rd Qu.:2880   3rd Qu.:  1.270   3rd Qu.:3.000   3rd Qu.:1.667  
+ Max.   :5136   Max.   :128.863   Max.   :6.000   Max.   :4.000  
+                                  NA's   :6680                   
+   dspFcIn            dspFcUp         
+ Length:993070      Length:993070     
+ Class :character   Class :character  
+ Mode  :character   Mode  :character  
+                                      
+                                      
+                                      
+                                      
+[1] "Summary Missing Data"
+
+ Missings per variable: 
+ Variable Count
+    dspId     0
+   dspLat     0
+  dspLong     0
+  dspNSat     0
+  dspAlti     0
+  dspVelo     0
+  dspActy  6680
+  dspAccu     0
+  dspFcIn  6680
+  dspFcUp  6680
+
+ Missings in combinations of variables: 
+        Combinations  Count    Percent
+ 0:0:0:0:0:0:0:0:0:0 986390 99.3273385
+ 0:0:0:0:0:0:1:0:1:1   6680  0.6726615
+[1] "***********************************"
+[1] "***********************************"
+[1] "Delete rows with NA in Acty, FcIn and FcUp"
+[1] "Aditional Columns"
+[1] "***********************************"
+[1] "***********************************"
+[1] "Final DataClean"
+[1] "Number of rows"
+[1] 986390
+[1] "Number of columns"
+[1] 13
+[1] "Structure"
+'data.frame':	986390 obs. of  13 variables:
+ $ dspId     : int  152 152 152 152 152 152 152 152 152 152 ...
+ $ dspLat    : num  -0.198 -0.198 -0.198 -0.198 -0.199 ...
+ $ dspLong   : num  -78.5 -78.5 -78.5 -78.5 -78.5 ...
+ $ dspNSat   : int  25 25 25 24 25 24 25 25 23 23 ...
+ $ dspAlti   : num  2868 2868 2868 2868 2634 ...
+ $ dspVelo   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ dspActy   : int  2 2 2 2 2 3 2 3 4 4 ...
+ $ dspAccu   : num  1.67 1.67 1.67 1.67 1.67 ...
+ $ dspFcIn   : chr  "2019-01-21 11:48:27" "2019-01-21 11:48:35" "2019-01-21 11:48:43" "2019-01-21 11:48:50" ...
+ $ dspFcUp   : chr  "2019-01-21 11:48:27" "2019-01-21 11:48:35" "2019-01-21 11:49:05" "2019-01-21 11:49:39" ...
+ $ dspVeloKmH: num  0 0 0 0 0 0 0 0 0 0 ...
+ $ dspHour   : Factor w/ 24 levels "0","1","2","3",..: 12 12 12 12 15 15 15 15 10 10 ...
+ $ dspWeekDay: Factor w/ 7 levels "1","2","3","4",..: 2 2 2 2 2 2 2 2 2 2 ...
+ - attr(*, "na.action")= 'omit' Named int  6 17 38 52 78 85 109 123 130 434 ...
+  ..- attr(*, "names")= chr  "6" "17" "38" "52" ...
+NULL
+[1] "Summary"
+     dspId            dspLat            dspLong          dspNSat     
+ Min.   : 152.0   Min.   :-0.40026   Min.   :-78.59   Min.   : 0.00  
+ 1st Qu.: 300.0   1st Qu.:-0.26886   1st Qu.:-78.52   1st Qu.:15.00  
+ Median : 590.0   Median :-0.20833   Median :-78.50   Median :19.00  
+ Mean   : 559.9   Mean   :-0.21799   Mean   :-78.50   Mean   :18.52  
+ 3rd Qu.: 765.0   3rd Qu.:-0.17376   3rd Qu.:-78.48   3rd Qu.:22.00  
+ Max.   :1031.0   Max.   : 0.02663   Max.   :-78.27   Max.   :37.00  
+                                                                     
+    dspAlti        dspVelo           dspActy         dspAccu     
+ Min.   :-178   Min.   :  0.000   Min.   :0.000   Min.   :1.333  
+ 1st Qu.:2634   1st Qu.:  0.000   1st Qu.:2.000   1st Qu.:1.667  
+ Median :2820   Median :  0.400   Median :3.000   Median :1.667  
+ Mean   :2634   Mean   :  1.756   Mean   :2.509   Mean   :1.680  
+ 3rd Qu.:2880   3rd Qu.:  1.271   3rd Qu.:3.000   3rd Qu.:1.667  
+ Max.   :5136   Max.   :128.863   Max.   :6.000   Max.   :4.000  
+                                                                 
+   dspFcIn            dspFcUp            dspVeloKmH         dspHour      
+ Length:986390      Length:986390      Min.   :  0.000   18     : 64261  
+ Class :character   Class :character   1st Qu.:  0.000   19     : 61818  
+ Mode  :character   Mode  :character   Median :  1.440   17     : 60225  
+                                       Mean   :  6.322   14     : 58950  
+                                       3rd Qu.:  4.577   12     : 58483  
+                                       Max.   :463.905   13     : 56898  
+                                                         (Other):625755  
+ dspWeekDay
+ 1: 89050  
+ 2:135957  
+ 3:138622  
+ 4:167033  
+ 5:182337  
+ 6:164642  
+ 7:108749  
+[1] "***********************************"
+[1] "***********************************"
+[1] "Query DataActivity"
+[1] "2019-04-25 11:10:31 CEST"
+[1] "***********************************"
+[1] "***********************************"
+[1] "dataActivity"
+[1] "Number of rows"
+[1] 986390
+[1] "Number of columns"
+[1] 9
+[1] "Structure"
+'data.frame':	986390 obs. of  9 variables:
+ $ qId         : int  152 152 152 152 152 152 152 152 152 152 ...
+ $ qLat        : num  -0.198 -0.198 -0.198 -0.198 -0.199 ...
+ $ qLong       : num  -78.5 -78.5 -78.5 -78.5 -78.5 ...
+ $ qActy       : int  2 2 2 2 2 3 2 3 4 4 ...
+ $ qActyDesc   : chr  "2-FOOT" "2-FOOT" "2-FOOT" "2-FOOT" ...
+ $ qVeloKmH    : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ qHour       : int  11 11 11 11 14 14 14 14 9 9 ...
+ $ qWeekDay    : int  2 2 2 2 2 2 2 2 2 2 ...
+ $ qWeekDayDesc: chr  "2\nMON" "2\nMON" "2\nMON" "2\nMON" ...
+NULL
+[1] "Summary"
+      qId              qLat              qLong            qActy      
+ Min.   : 152.0   Min.   :-0.40026   Min.   :-78.59   Min.   :0.000  
+ 1st Qu.: 300.0   1st Qu.:-0.26886   1st Qu.:-78.52   1st Qu.:2.000  
+ Median : 590.0   Median :-0.20833   Median :-78.50   Median :3.000  
+ Mean   : 559.9   Mean   :-0.21799   Mean   :-78.50   Mean   :2.509  
+ 3rd Qu.: 765.0   3rd Qu.:-0.17376   3rd Qu.:-78.48   3rd Qu.:3.000  
+ Max.   :1031.0   Max.   : 0.02663   Max.   :-78.27   Max.   :6.000  
+  qActyDesc            qVeloKmH           qHour          qWeekDay    
+ Length:986390      Min.   :  0.000   Min.   : 0.00   Min.   :1.000  
+ Class :character   1st Qu.:  0.000   1st Qu.: 9.00   1st Qu.:3.000  
+ Mode  :character   Median :  1.440   Median :14.00   Median :4.000  
+                    Mean   :  6.322   Mean   :13.45   Mean   :4.162  
+                    3rd Qu.:  4.577   3rd Qu.:18.00   3rd Qu.:6.000  
+                    Max.   :463.905   Max.   :23.00   Max.   :7.000  
+ qWeekDayDesc      
+ Length:986390     
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   
+[1] "***********************************"
+[1] "***********************************"
+[1] "***********************************"
+[1] "***********************************"
+[1] "dataActivity0123"
+[1] "Number of rows"
+[1] 885680
+[1] "Number of columns"
+[1] 9
+[1] "Structure"
+'data.frame':	885680 obs. of  9 variables:
+ $ qId         : int  152 152 152 152 152 152 152 152 152 152 ...
+ $ qLat        : num  -0.198 -0.198 -0.198 -0.198 -0.199 ...
+ $ qLong       : num  -78.5 -78.5 -78.5 -78.5 -78.5 ...
+ $ qActy       : int  2 2 2 2 2 3 2 3 2 2 ...
+ $ qActyDesc   : chr  "2-FOOT" "2-FOOT" "2-FOOT" "2-FOOT" ...
+ $ qVeloKmH    : num  0 0 0 0 0 0 0 0 0 1.98 ...
+ $ qHour       : int  11 11 11 11 14 14 14 14 10 10 ...
+ $ qWeekDay    : int  2 2 2 2 2 2 2 2 2 2 ...
+ $ qWeekDayDesc: chr  "2\nMON" "2\nMON" "2\nMON" "2\nMON" ...
+NULL
+[1] "Summary"
+      qId              qLat              qLong            qActy      
+ Min.   : 152.0   Min.   :-0.40026   Min.   :-78.59   Min.   :0.000  
+ 1st Qu.: 300.0   1st Qu.:-0.27130   1st Qu.:-78.52   1st Qu.:2.000  
+ Median : 592.0   Median :-0.20935   Median :-78.50   Median :3.000  
+ Mean   : 560.7   Mean   :-0.21843   Mean   :-78.50   Mean   :2.326  
+ 3rd Qu.: 757.0   3rd Qu.:-0.17374   3rd Qu.:-78.48   3rd Qu.:3.000  
+ Max.   :1031.0   Max.   : 0.02663   Max.   :-78.27   Max.   :3.000  
+  qActyDesc            qVeloKmH           qHour          qWeekDay    
+ Length:885680      Min.   :  0.000   Min.   : 0.00   Min.   :1.000  
+ Class :character   1st Qu.:  0.000   1st Qu.: 9.00   1st Qu.:3.000  
+ Mode  :character   Median :  1.328   Median :14.00   Median :4.000  
+                    Mean   :  5.957   Mean   :13.39   Mean   :4.158  
+                    3rd Qu.:  4.284   3rd Qu.:18.00   3rd Qu.:6.000  
+                    Max.   :463.905   Max.   :23.00   Max.   :7.000  
+ qWeekDayDesc      
+ Length:885680     
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   
+[1] "***********************************"
+[1] "***********************************"
+[1] "Query DataActivity OK!!!"
+[1] "2019-04-25 11:10:38 CEST"
+[1] "Reading CSV files.."
+[1] "2019-04-25 11:10:38 CEST"
+[1] "***********************************"
+[1] "***********************************"
+[1] "DataDevice"
+[1] "list"
+[1] "Number of rows"
+[1] 489
+[1] "Number of columns"
+[1] 7
+[1] "Structure"
+'data.frame':	489 obs. of  7 variables:
+ $ xDId       : int  152 155 156 646 158 159 660 161 986 163 ...
+ $ xDNumPoints: int  217 54 97 2 22 165 1 372 5 68 ...
+ $ xDUsuId    : int  162 165 166 653 168 169 667 171 986 173 ...
+ $ xDSdk      : int  26 27 26 24 27 26 24 26 24 27 ...
+ $ xDSerie    : Factor w/ 155 levels "4034A","6055B",..: 84 145 7 68 134 90 108 6 100 131 ...
+ $ xDAndroV   : Factor w/ 5 levels "KitKat - 4","Lollipop - 5",..: 5 5 5 4 5 5 4 5 4 5 ...
+ $ xDManufact : Factor w/ 15 levels "Alcatel","Blu",..: 11 5 5 15 11 11 11 5 11 11 ...
+NULL
+[1] "Summary"
+      xDId         xDNumPoints       xDUsuId           xDSdk      
+ Min.   : 152.0   Min.   :    1   Min.   : 162.0   Min.   :19.00  
+ 1st Qu.: 322.0   1st Qu.:   49   1st Qu.: 327.0   1st Qu.:23.00  
+ Median : 545.0   Median :  289   Median : 550.0   Median :25.00  
+ Mean   : 551.5   Mean   : 2017   Mean   : 554.1   Mean   :24.66  
+ 3rd Qu.: 755.0   3rd Qu.: 1956   3rd Qu.: 758.0   3rd Qu.:26.00  
+ Max.   :1031.0   Max.   :42266   Max.   :1030.0   Max.   :27.00  
+                                                                  
+     xDSerie               xDAndroV     xDManufact 
+ ANE-LX3 : 35   KitKat - 4     :  2   Samsung:246  
+ SM-G610M: 24   Lollipop - 5   : 57   Huawei :143  
+ SM-G532M: 15   Marshmallow - 6: 81   Sony   : 44  
+ SM-G570M: 15   Nougat - 7     :124   Xiaomi : 21  
+ FIG-LX3 : 13   Oreo - 8       :225   LG     : 13  
+ SM-J250M: 12                         Alcatel:  5  
+ (Other) :375                         (Other): 17  
+[1] "***********************************"
+[1] "***********************************"
+[1] "***********************************"
+[1] "***********************************"
+[1] "DataQuest"
+[1] "list"
+[1] "Number of rows"
+[1] 4571
+[1] "Number of columns"
+[1] 5
+[1] "Structure"
+'data.frame':	4571 obs. of  5 variables:
+ $ xQDspId: int  152 152 152 152 152 152 152 153 153 153 ...
+ $ xQResId: int  1 2 3 4 5 6 7 1 2 3 ...
+ $ xQRes  : Factor w/ 1028 levels "","123","1855",..: 759 1 410 26 1 1 1 618 1 605 ...
+ $ xQOpc  : int  0 1 0 0 3 2 1 0 2 0 ...
+ $ xQFec  : Factor w/ 1039 levels "1/20/2019 22:01",..: 1 1 1 1 2 2 2 3 3 3 ...
+NULL
+[1] "Summary"
+    xQDspId          xQResId      xQRes          xQOpc      
+ Min.   : 152.0   Min.   :1          :2612   Min.   :0.000  
+ 1st Qu.: 341.0   1st Qu.:2   1999   :  86   1st Qu.:0.000  
+ Median : 579.0   Median :4   1998   :  77   Median :1.000  
+ Mean   : 577.7   Mean   :4   1996   :  61   Mean   :1.005  
+ 3rd Qu.: 787.0   3rd Qu.:6   2000   :  60   3rd Qu.:2.000  
+ Max.   :1031.0   Max.   :7   1997   :  52   Max.   :5.000  
+                              (Other):1623                  
+             xQFec     
+ 2/3/2019 21:12 :  32  
+ 1/23/2019 13:11:  21  
+ 1/23/2019 21:43:  21  
+ 1/23/2019 15:06:  20  
+ 1/23/2019 21:46:  19  
+ 2/4/2019 20:45 :  19  
+ (Other)        :4439  
+[1] "***********************************"
+[1] "***********************************"
+[1] "Reading CSV files OK!!"
+[1] "2019-04-25 11:10:38 CEST"
+[1] "Saving Data..."
+[1] "2019-04-25 11:10:38 CEST"
+[1] "Saving Data OK!!!"
+[1] "End Script!!!"
+[1] "2019-04-25 11:11:22 CEST"

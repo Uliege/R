@@ -1,0 +1,25 @@
+{
+  "type" : "FeatureCollection",
+  "features" : [ {
+    "geometry" : {
+      "coordinates" : [ -78.4891920, -0.1903513 ],
+      "type" : "Point"
+    },
+    "properties" : {
+      "Google Maps URL" : "http://maps.google.com/?cid=13784997259952674008",
+      "Location" : {
+        "Address" : "Rumania E5-110 y, Hungría 170515, Ecuador",
+        "Business Name" : "Técnicas Americanas de Estudio",
+        "Country Code" : "EC",
+        "Geo Coordinates" : {
+          "Latitude" : "-0.1903513",
+          "Longitude" : "-78.4891920"
+        }
+      },
+      "Published" : "2016-10-20T13:02:00Z",
+      "Title" : "Tecnicas Americana De Estudio",
+      "Updated" : "2016-10-20T13:02:00Z"
+    },
+    "type" : "Feature"
+  } ]
+}

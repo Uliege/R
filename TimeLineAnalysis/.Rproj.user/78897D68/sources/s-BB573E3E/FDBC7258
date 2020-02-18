@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1581444435637.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "FDBC7258",
+    "lastKnownWriteTime" : 3833180308419998817,
+    "last_content_update" : 1581444435637,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "f989988bd90c4a5b878d634a1b9b3cc7",
+        "name" : "r.SDE",
+        "title" : "r.SDE"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}

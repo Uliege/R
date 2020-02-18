@@ -1,0 +1,323 @@
+hist(rnorm(100)) 
+
+library(VIM)
+
+dataCSV = read.csv("D:/tmp/DataDevice.csv")
+dim(dataCSV)
+print(dataCSV)
+str(dataCSV)
+hist(dataCSV$manufacturer)
+print(dataCSV$manufacturer)
+t <- table(dataCSV$manufacturer)
+print(t)
+barplot(t, xlab="Manufacturers", ylab="NumDevices", border="blue")
+
+help(hist)
+hist(t, breaks = 5)
+
+summary(dataCSV)
+aggr(dataCSV)
+
+
+t1<-NULL
+
+help(filter)
+help(droplevels)
+help(geom_bar)
+help(factor)
+
+
+
+
+
+
+
+
+library(rjson)
+dataJSON = fromJSON(file = "D:/tmp/deviceG.json")
+dataFrameJSON <- NULL
+dataFrameJSON <- as.data.frame(dataJSON)
+str(dataJSON)
+str(dataFrameJSON)
+t <- table(dataJSON[0])
+dim(dataJSON)
+print(dataJSON)
+print(dataJSON[[300]]$sensor)
+hist(t)
+summary(dataJSON)
+print(dataJSON[1])
+print(dataJSON$dspId)
+aggr(dataJSON)
+
+
+
+
+
+#Rutina para leer el archivo JSON
+
+library(jsonlite)
+archivo <- "D:/tmp/deviceG.json"
+con <- file(archivo, open="r")
+ejemplo_json <- readLines(con)
+close(con)
+datosJSON2 <- fromJSON(ejemplo_json)
+print(datosJSON2)
+str(datosJSON2)
+
+
+print(datosJSON2$dspId)
+print(datosJSON2$fecha)
+print(datosJSON2$sensor$dateInsert)
+print(datosJSON2$sensor$dateUpdate)
+t <- table(datosJSON2$sensor$dateInsert, datosJSON2$sensor$dateUpdate)
+print(t)
+print(datosJSON2$sensor$dateInsert + ' ' + datosJSON2$sensor$dateUpdate)
+
+
+
+
+#Equipo con mayor recolección de datos
+
+archivo <- "D:/tmp/device295.json"
+con <- file(archivo, open="r")
+ejemplo_json <- readLines(con)
+close(con)
+datos295 <- fromJSON(ejemplo_json)
+print(datos295)
+str(datos295)
+
+
+
+
+archivo <- "D:/tmp/data8.json"
+con <- file(archivo, open="r")
+ejemplo_json <- readLines(con)
+close(con)
+datos8 <- fromJSON(ejemplo_json)
+
+
+#Para hacer consultas a la base de datos MySQL
+
+library(RMySQL)
+driver=dbDriver("MySQL");
+conexion = dbConnect(MySQL(),host="localhost",dbname="gmoncayo_smart_gps",user="root",pass="_Arsenal2011");
+query = dbGetQuery(conexion,statement="SELECT * FROM tabla");
+query
+
+
+
+
+
+
+
+library(ggplot2)
+
+ggplot(data = dataCSV, aes(x = sdk, y = manufacturer)) + geom_point()
+
+require(ggplot2)
+require(RCurl)
+
+#gsqAPI is a helper function that loads data in from a shared as public Google Spreadsheet.
+gsqAPI = function(key,query,gid=0){ return( read.csv( paste( sep="",'http://spreadsheets.google.com/tq?', 'tqx=out:csv','&tq=', curlEscape(query), '&key=', key, '&gid=', gid) ) ) }
+
+#Provide the spreadsheet key
+#Data was originally grabbed from the McLaren F1 Live Dashboard during the race and is Copyright (�) McLaren Marketing Ltd 2010 (I think? Or possibly Vodafone McLaren Mercedes F1 2010(?)). I believe that speed, throttle and brake data were sponsored by Vodafone.
+key='0AmbQbL4Lrd61dER5Qnl3bHo4MkVNRlZ1OVdicnZnTHc'
+#We can write SQL like queries over the spreadsheet, as described in https://blog.ouseful.info/2009/05/18/using-google-spreadsheets-as-a-databace-with-the-google-visualisation-api-query-language/
+q='select *'
+
+#Run the query on the database
+df=gsqAPI(key,q)
+
+#Sanity check - preview the imported data
+head(df)
+
+#Example circuit map - sort of - showing the gLat (latitudinal 'g-force') values around the circuit (point size is absolute value of gLat, colour has two values, one for + and one for - values (swing to left and swing to right)).
+g=ggplot(df) + geom_point(aes(x=NGPSLongitude,y=NGPSLatitude,col=sign(gLat),size=abs(gLat)))
+print(g)
+
+ggplot(df) + geom_point(aes(x=NGPSLongitude,y=NGPSLatitude,col=sign(gLat),size=abs(gLat))) + coord_map(project="mercator")
+
+#Example "driver DNA" trace, showing low gear  throttle usage (distance round track on x-axis, lap number on y axis, node size is inversely proportional to gear number (low gear, large point size), colour relativ to throttlepedal depression
+g=ggplot(df) + geom_point(aes(x=sLap,y=Lap,col=rThrottlePedal,size=-NGear)) + scale_colour_gradient(low='red',high='green')
+print(g)
+
+#Example of gear value around the track
+g=ggplot(df) + geom_line(aes(x=sLap,y=NGear))
+print(g)
+
+
+
+
+
+# Ejercicio Uber
+
+library(dplyr)
+
+apr14 <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/uber-tlc-foil-response/master/uber-trip-data/uber-raw-data-apr14.csv")
+may14 <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/uber-tlc-foil-response/master/uber-trip-data/uber-raw-data-may14.csv")
+jun14 <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/uber-tlc-foil-response/master/uber-trip-data/uber-raw-data-jun14.csv")
+jul14 <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/uber-tlc-foil-response/master/uber-trip-data/uber-raw-data-jul14.csv")
+aug14 <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/uber-tlc-foil-response/master/uber-trip-data/uber-raw-data-aug14.csv")
+sep14 <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/uber-tlc-foil-response/master/uber-trip-data/uber-raw-data-sep14.csv")
+
+data14 <- bind_rows(apr14, may14, jun14, jul14, aug14, sep14)
+
+typeof(apr14)
+str(apr14)
+names(apr14)
+
+summary(data14)
+
+library(lubridate)
+
+# Separate or mutate the Date/Time columns
+data14$Date.Time <- mdy_hms(data14$Date.Time)
+data14$Year <- factor(year(data14$Date.Time))
+data14$Month <- factor(month(data14$Date.Time))
+data14$Day <- factor(day(data14$Date.Time))
+data14$Weekday <- factor(wday(data14$Date.Time))
+data14$Hour <- factor(hour(data14$Date.Time))
+data14$Minute <- factor(minute(data14$Date.Time))
+data14$Second <- factor(second(data14$Date.Time))
+#data14$date_time
+data14$Month
+
+data14$Date.Time
+mdy_hms(data14$Date.Time)
+factor(year(data14$Date.Time))
+
+
+head(data14, n=10)
+
+
+# VIM library for using 'aggr'
+library(VIM)
+
+# 'aggr' plots the amount of missing/imputed values in each column
+aggr(data14)
+
+#################
+
+
+archivo <- "D:/tmp/device295.json"
+con <- file(archivo, open="r")
+ejemplo_json <- readLines(con)
+close(con)
+datos295 <- fromJSON(ejemplo_json)
+
+typeof(datos295)
+str(datos295)
+names(datos295)
+summary(datos295)
+
+datos295a <- data.frame(datos295$sensor$numSatelites, datos295$sensor$velocidad, datos295$sensor$actividad, datos295$sensor$altitude, datos295$sensor$latitude, datos295$sensor$longitude)
+
+latlong <- data.frame(satelites = datos295$sensor$numSatelites, lat = datos295$sensor$latitude, long = datos295$sensor$longitude)
+
+summary(latlong)
+
+aggr(datos295)
+aggr(datos295a)
+aggr(latlong, col = c("black", "green", "gray"), numbers = TRUE, combined = TRUE)
+aggr(latlong, col = c("blue", "black", "gray"), only.miss = TRUE)
+
+
+
+datos295$fecha[1]
+datos295$sensor$dateInsert[746000]
+as.character(datos295$sensor$dateInsert[746000])
+typeof(datos295$sensor$dateInsert[746000])  
+as.Date(datos295$sensor$dateInsert[746000])
+as.Date(datos295$sensor$dateInsert[746000], "%b %e, %Y %I:%M:%S %p")
+
+
+factor(year(as.Date(datos295$fecha)))
+
+strptime("12/02/2015 11:23 AM", "%d/%m/%Y %I:%M %p", tz = "Europe/London")
+
+strptime("12/02/2015 11:23", "%d/%m/%Y %H:%M", tz = "Europe/London")
+
+strptime("Jan 22, 2019 4:47:09 PM", "%b %e, %Y %H:%M:%S", tz = "Europe/London")
+
+strptime("Tue, 23 Mar 2010 14:36:38 -0400", "%a, %d %b %Y %H:%M:%S %z")
+
+
+strptime("Jan 22, 2019 4:47:09 PM", "%b %e, %Y %I:%M:%S %p")
+
+strptime("Jan 22, 2019 4:47:09 PM", "%b %d, %Y %I:%M:%S %p")
+
+strptime("jan. 22, 2019 4:47:09", "%b %e, %Y %X")
+
+strptime("ene. 22, 2019 4:47:09", "%b %e, %Y %X")
+
+Sys.timezone()
+
+as.Date('22JUN01',format='%d%B%Y')
+as.Date('April 26, 2001',format='%B %d, %Y')
+
+strptime("Jan 22, 2019 4:47:09 PM", "%b %e, %Y %I:%M:%S %p", tz = "America/Los_Angeles")
+
+Sys.time()-5500100
+
+format(Sys.time()-5500100, "%d%B%Y")
+format(Sys.time()-5500100, "%d%b%Y")
+format(Sys.time()-5500100, "%b %e, %Y %H:%M:%S", tz = "GMT-0")
+format(Sys.time()-5500100, "%b %e, %Y %X %p")
+
+format(Sys.time()-5500100, "%Y-%m-%d %X")
+
+Sys.timezone()
+
+str(OlsonNames()) ## typically close to 600 hundred names,
+## typically some acronyms/aliases such as "UTC", "NZ", "MET", "Eire", ..., but
+## mostly pairs (and triplets) such as "Pacific/Auckland"
+table(sl <- grepl("/", OlsonNames()))
+OlsonNames()[ !sl ] # the simple ones
+head(Osl <- strsplit(OlsonNames()[sl], "/"))
+(tOS1 <- table(vapply(Osl, `[[`, "", 1))) # Continents, countries, ...
+table(lengths(Osl))# most are pairs, some triplets
+str(Osl[lengths(Osl) >= 3])# "America" South and North ...
+
+
+
+
+
+
+
+
+Sys.time()
+## print with possibly greater accuracy:
+op <- options(digits.secs = 6)
+Sys.time()
+options(op)
+
+## locale-specific version of date()
+format(Sys.time(), "%a %b %d %X %Y")
+
+Sys.Date()
+
+
+
+format(Sys.time(), "%b %e, %Y %I:%M:%S %p", tz = "Europe/London")
+x <- c("4abr2019", "2jan1960", "31mar1960", "30jul1960")
+z <- strptime(x, "%d%b%Y")
+z
+
+
+strptime(datos295$fecha[1], "%d/%m/%Y %I:%M %p")
+
+
+
+
+
+
+iris
+
+
+#Análisis Exploratorio 
+
+library(ggvis)
+
+
+

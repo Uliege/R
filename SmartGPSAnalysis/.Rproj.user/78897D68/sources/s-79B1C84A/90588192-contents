@@ -1,0 +1,47 @@
+a <- sample(10)
+print(a)
+plot(a, type = "b")
+
+
+n <- floor(runif(1000)*10)
+t <- table(n)
+barplot(t)
+
+
+str(iris)
+
+
+
+
+# Load ggplot2
+library(ggplot2)
+
+# Scatterplot of exclaim_mess vs. num_char
+ggplot(email50, aes(x = num_char, y = exclaim_mess, color = factor(spam))) +
+  geom_point()
+
+
+
+
+# Load the package required to read JSON files.
+library("rjson")
+
+# Give the input file name to the function.
+result <- fromJSON(file = "D:/tmp/device295.json")
+
+# Print the result.
+print(result)
+
+str(result)
+
+library(dplyr)
+
+glimpse(result)
+
+
+
+
+library("data.table")
+resultTable <- fread(file = "D:/tmp/device295.json")
+
+

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1581415549942.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "218A9935",
+    "lastKnownWriteTime" : 1581416768,
+    "last_content_update" : 1581416768796,
+    "path" : "D:/RSoftware/RProjects/TimeLineAnalysis/code/loadTimeLineData.R",
+    "project_path" : "code/loadTimeLineData.R",
+    "properties" : {
+        "cursorPosition" : "218,34",
+        "scrollLine" : "203",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

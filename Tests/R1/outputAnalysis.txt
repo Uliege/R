@@ -1,0 +1,81 @@
+[1] "Start.."
+[1] "Script: smartGPSAnalysis.R"
+[1] "2019-04-22 11:27:16 CEST"
+[1] "Load raw data"
+[1] "2019-04-22 11:27:16 CEST"
+[1] "Load raw data OK!!!"
+[1] "2019-04-22 11:27:50 CEST"
+[1] "Data Analysis...."
+[1] "2019-04-22 11:28:15 CEST"
+[1] "******************************************"
+[1] "Covariance Matrix "
+[1] "******************************************"
+                   lat          long        numSat      altitude     velocity
+lat       6.562462e-03  1.794830e-03 -9.209978e-04     -2.623598 -0.003555764
+long      1.794830e-03  1.313403e-03 -1.930716e-02     -4.273108  0.006932726
+numSat   -9.209978e-04 -1.930716e-02  2.590278e+01    289.693972  2.338017541
+altitude -2.623598e+00 -4.273108e+00  2.896940e+02 341398.751520 98.243344969
+velocity -3.555764e-03  6.932726e-03  2.338018e+00     98.243345 11.360477790
+Accuracy -5.330709e-05  9.095724e-05  1.931288e-03     -1.592836 -0.001006719
+hour      2.265791e-02  6.692710e-03 -2.197907e+00    -61.843258  0.229826888
+              Accuracy         hour
+lat      -5.330709e-05   0.02265791
+long      9.095724e-05   0.00669271
+numSat    1.931288e-03  -2.19790661
+altitude -1.592836e+00 -61.84325789
+velocity -1.006719e-03   0.22982689
+Accuracy  7.187793e-04  -0.01600625
+hour     -1.600625e-02  23.64476501
+[1] "******************************************"
+[1] "Correlation Matrix"
+[1] "******************************************"
+                 lat        long      numSat    altitude    velocity
+lat       1.00000000  0.61135161 -0.00223384 -0.05542848 -0.01302270
+long      0.61135161  1.00000000 -0.10467581 -0.20179668  0.05675535
+numSat   -0.00223384 -0.10467581  1.00000000  0.09741712  0.13629385
+altitude -0.05542848 -0.20179668  0.09741712  1.00000000  0.04988545
+velocity -0.01302270  0.05675535  0.13629385  0.04988545  1.00000000
+Accuracy -0.02454448  0.09361395  0.01415390 -0.10168157 -0.01114069
+hour      0.05752001  0.03797830 -0.08881136 -0.02176677  0.01402281
+            Accuracy        hour
+lat      -0.02454448  0.05752001
+long      0.09361395  0.03797830
+numSat    0.01415390 -0.08881136
+altitude -0.10168157 -0.02176677
+velocity -0.01114069  0.01402281
+Accuracy  1.00000000 -0.12277908
+hour     -0.12277908  1.00000000
+[1] "Generating Charts...."
+[1] "Chart01-SatelliteNumber-Density.png 2019-04-22 11:28:16"
+[1] "Chart01-SatelliteNumber-Density.png 2019-04-22 11:28:17"
+[1] "Chart02-Activity-Density.png 2019-04-22 11:28:17"
+[1] "Chart02-Activity-Density.png 2019-04-22 11:28:18"
+[1] "Chart03-Accuracy-Density.png 2019-04-22 11:28:18"
+[1] "Chart03-Accuracy-Density.png 2019-04-22 11:28:19"
+[1] "Chart04-ActivityDistributionHour-Boxes.png 2019-04-22 11:28:19"
+[1] "Chart04-ActivityDistributionHour-Boxes.png 2019-04-22 11:29:29"
+[1] "Chart05-ActivityDistributionDay-Boxes.png 2019-04-22 11:29:29"
+[1] "Chart05-ActivityDistributionDay-Boxes.png 2019-04-22 11:30:33"
+[1] "Chart06-ActivityDistributionHour-Bars.png 2019-04-22 11:30:33"
+[1] "Chart06.1-ActivityDistributionHour-Bars-Movement.png 2019-04-22 11:30:53"
+[1] "Chart06.2-ActivityDistributionHour-Bars-NoMovement.png 2019-04-22 11:30:59"
+[1] "Chart07-ActivityDistributionDay-Bars.png 2019-04-22 11:31:04"
+[1] "Chart07.1-ActivityDistributionDay-Bars-Movement.png 2019-04-22 11:31:17"
+[1] "Chart07.2-ActivityDistributionDay-Bars-NoMovement.png 2019-04-22 11:31:20"
+[1] "Chart08-ActivityVelocityDistributionHour-Points.png 2019-04-22 11:31:23"
+[1] "Chart08.1-ActivityVelocityDistributionHour-Points-Movement.png 2019-04-22 11:36:09"
+[1] "Chart08.2-ActivityVelocityDistributionHour-Points-NoMovement.png 2019-04-22 11:37:08"
+[1] "Chart09-ActivityVelocityDistributionDay-Points.png 2019-04-22 11:38:05"
+[1] "Chart09.1-ActivityVelocityDistributionDay-Points-Movement.png 2019-04-22 11:42:05"
+[1] "Chart09.2-ActivityVelocityDistributionDay-Points-NoMovement.png 2019-04-22 11:43:04"
+[1] "Chart10-VelocityDistributionActivity-Boxplot.png 2019-04-22 11:44:00"
+[1] "Chart10.1-VelocityDistributionActivity-Boxplot-Movement.png 2019-04-22 11:45:01"
+[1] "Chart10.2-VelocityDistributionActivity-Boxplot-NoMovement.png 2019-04-22 11:45:52"
+[1] "Chart11-VelocityDistributionHour.png 2019-04-22 11:46:44"
+[1] "Chart11.1-VelocityDistributionHour-Movement.png 2019-04-22 11:49:00"
+[1] "Chart11.2-VelocityDistributionHour-NoMovement.png 2019-04-22 11:50:28"
+[1] "Chart12-VelocityDistributionDay.png 2019-04-22 11:51:14"
+[1] "Chart12.1-VelocityDistributionDay-Movement.png 2019-04-22 11:53:32"
+[1] "Chart12.2-VelocityDistributionDay-NoMovement.png 2019-04-22 11:55:03"
+[1] "End Script: smartGPSAnalysis!!"
+[1] "2019-04-22 11:55:51 CEST"

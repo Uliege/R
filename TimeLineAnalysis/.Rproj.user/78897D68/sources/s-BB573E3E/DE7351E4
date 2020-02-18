@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1581416719318.000,
+    "dirty" : true,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "DE7351E4",
+    "lastKnownWriteTime" : 1581435693,
+    "last_content_update" : 1581507908827,
+    "path" : "D:/RSoftware/RProjects/TimeLineAnalysis/code/maLoad.R",
+    "project_path" : "code/maLoad.R",
+    "properties" : {
+        "cursorPosition" : "142,0",
+        "scrollLine" : "120"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
