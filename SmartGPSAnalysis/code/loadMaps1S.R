@@ -28,7 +28,7 @@ print("Maps of Quito")
 
 sink(outputFile, append = TRUE)
 print("Register API Google Maps")
-
+register_google(key = "AgtftrStftfhGFGFTFTfgfdgfdgMyEy9xO-pqXKryVjE")
 print("Query Maps of Quito")
 mapQuito <- get_map(location = c(long= -78.418674, lat = -0.183446), zoom = 11)
 roadMapQuito <- get_map(location = c(long= -78.418674, lat = -0.183446), zoom = 11, maptype = "roadmap") 
