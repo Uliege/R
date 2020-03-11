@@ -1,10 +1,10 @@
+
+#Script para generar datos de SDE y SDD del paquete ASPACE desde los archivos json
+
 library(jsonlite)
-library(sqldf)
 library(aspace)
-library(VIM)
 library(dplyr)
 library(ggmap)
-
 
 #Funcion para cargar directorio con archivo y deserializar#
 cargar<-function(dir, arch){
@@ -25,7 +25,7 @@ rm(fileMaps, urlRawData)
 urlJsonData = paste(urlDefault,"/data/",sep = "")
 jsonName = "tld"
 
-#Variables para la fecha de análisis
+#Variables para la fecha de análisis - MAX 2019-11-18
 aYear=2019
 aWeek=46 #November 11-17
 aWeedDay=4 #Wednesday
@@ -44,8 +44,8 @@ con <- file(fileLog, open="a")
 writeLines(text = as.character(Sys.time()), con = con)
 
 #Proceso repetitivo
-for(k in 91:100) {
-  #k=9
+for(k in 0:160) {
+  #k=1
   msg = k
   print(msg)
   writeLines(text = as.character(msg), con = con)
