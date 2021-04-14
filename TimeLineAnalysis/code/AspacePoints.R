@@ -14,6 +14,8 @@ urlModels = paste(urlDefault,"/models/",sep = "")
 urlRawData = paste(urlDefault,"/rawdata/",sep = "")
 urlReports = paste(urlDefault,"/reports/",sep = "")
 urlOutput = paste(urlDefault,"/output/",sep = "")
+urlExcelData = paste(urlDefault,"/exceldata/",sep = "")
+
 
 #Archivo para almacenar el log de ejecución
 fileLog = paste("log",trimws(str_replace_all(as.character(Sys.time()),":","")),".txt", sep = "")
@@ -22,17 +24,6 @@ con <- file(fileLog, open="a")
 #Hora de inicio del proceso
 writeLines(text = as.character(Sys.time()), con = con)
 
-
-#Lectuar de datos procesados en python
-pathPython = 'D:/python/TimelineGPSData-master/my_data.csv'
-dataPython = read.csv(pathPython)
-
-dataPython$datetime <- ymd_hms(dataPython$datetime)
-
-dataPython$Y = year(dataPython$datetime)
-dataPython$M = month(dataPython$datetime)
-dataPython$W = week(dataPython$datetime)
-dataPython$contador = 1
 
 #Especifica el nombre de los archivos raw
 rawName = "tld"
@@ -51,84 +42,98 @@ Y_W = NULL
 
 #Proceso repetitivo
 for(k in 0:160) {
-  #k = 0
+  #k = 8
   
+  #Lectura de datos procesados en python
   #Para filtrar los datos
   idFile = paste(rawName,k,sep = "")
+  excelFile = paste(urlExcelData,idFile,'.csv',sep="")
   
-  #Datos de cada persona
-  dataFile = filter(dataPython, uid == idFile)
-  
-  #Obtener las semanas de cada año
-  Y_W = dataFile %>% 
-    group_by(Y,M,W) %>% 
-    summarise(numPoints = sum(contador)) %>%
-    filter(numPoints >= 0)
-  
-  #Contador semanas no procesadas
-  cont = 0
-  
-  if(nrow(Y_W) > 0){
+  if(file.exists(excelFile)){
     
-    #para que se almacenen los archivos de ASPACE en el directorio output
-    setwd(urlOutput)
+    dataPython = read.csv(excelFile)
     
-    for(i in 1:nrow(Y_W)){
-      #i=1 
+    dataPython$datetime <- ymd_hms(dataPython$datetime)
+    
+    dataPython$Y = year(dataPython$datetime)
+    dataPython$M = month(dataPython$datetime)
+    dataPython$W = week(dataPython$datetime)
+    dataPython$contador = 1
+    
+    #Datos de cada persona
+    dataFile = filter(dataPython, uid == idFile)
+    
+    #Obtener las semanas de cada año
+    Y_W = dataFile %>% 
+      group_by(Y,M,W) %>% 
+      summarise(numPoints = sum(contador)) %>%
+      filter(numPoints >= 0)
+    
+    #Contador semanas no procesadas
+    cont = 0
+    
+    if(nrow(Y_W) > 0){
       
-      #Variables de cada semana
-      xYear = as.integer(Y_W[i,1])
-      xMonth = as.integer(Y_W[i,2])
-      xWeek = as.integer(Y_W[i,3])
-      xTotal = as.integer(Y_W[i,4])
+      #para que se almacenen los archivos de ASPACE en el directorio output
+      setwd(urlOutput)
       
-      #Debe existir al menos 2 puntos para calcular ASPACE
-      if(xTotal > 1){
+      for(i in 1:nrow(Y_W)){
+        #i=2 
         
-        #Filtrar datos a procesar
-        dataWeek = dataFile %>%
-          filter(Y == xYear & W == xWeek)
-      
-        # latitude - longitude
-        coord = select(dataWeek, 3:4)
-      
-        #Cálculo SDE - Standard Deviation Ellipse      
-        nameOutput = paste(idFile,"-",xYear,"-",xMonth,"-",xWeek,"-",xTotal,sep = "")
-        calc_sde(id=nameOutput, filename = paste("SDEloc_",nameOutput,"_Output.txt",sep=""), centre.xy=NULL, 
-                 calccentre=TRUE, weighted=FALSE, weights=NULL, points=coord, verbose=FALSE)
+        #Variables de cada semana
+        xYear = as.integer(Y_W[i,1])
+        xMonth = as.integer(Y_W[i,2])
+        xWeek = as.integer(Y_W[i,3])
+        xTotal = as.integer(Y_W[i,4])
         
-        #Concatenar resultado
-        xDataSDEatt = rbind(xDataSDEatt, sdeatt)
-        xDataSDEloc = rbind(xDataSDEloc, sdeloc)
+        #Debe existir al menos 3 puntos para calcular ASPACE
+        if(xTotal > 2){
+          
+          #Filtrar datos a procesar
+          dataWeek = dataFile %>%
+            filter(Y == xYear & W == xWeek)
         
-        #Cálculo SDD - Standard Distance Deviation (Standard Distance)
-        calc_sdd(id=nameOutput, filename = paste("SDDloc_",nameOutput,"_Output.txt",sep=""), centre.xy=NULL, 
-                 calccentre=TRUE, weighted=FALSE, weights=NULL, points=coord, verbose=FALSE)
-        #Concatenar resultado
-        xDataSDDatt = rbind(xDataSDDatt, sddatt)
-        xDataSDDloc = rbind(xDataSDDloc, sddloc)
+          # latitude - longitude
+          coord = select(dataWeek, 3:4)
         
-        #Cálculo BOX - Standard Deviation Box
-        calc_box(id=nameOutput, filename = paste("BOXloc_",nameOutput,"_Output.txt",sep=""), centre.xy=NULL, 
-                 calccentre=TRUE, weighted=FALSE, weights=NULL, points=coord, verbose=FALSE)
-        #Concatenar resultado
-        xDataBOXatt = rbind(xDataBOXatt, boxatt)
-        xDataBOXloc = rbind(xDataBOXloc, boxloc)
-      }else{
-        cont=cont+1
+          #Cálculo SDE - Standard Deviation Ellipse      
+          nameOutput = paste(idFile,"-",xYear,"-",xMonth,"-",xWeek,"-",xTotal,sep = "")
+          calc_sde(id=nameOutput, filename = paste("SDEloc_",nameOutput,"_Output.txt",sep=""), centre.xy=NULL, 
+                   calccentre=TRUE, weighted=FALSE, weights=NULL, points=coord, verbose=FALSE)
+          
+          #Concatenar resultado
+          xDataSDEatt = rbind(xDataSDEatt, sdeatt)
+          xDataSDEloc = rbind(xDataSDEloc, sdeloc)
+          
+          #Cálculo SDD - Standard Distance Deviation (Standard Distance)
+          calc_sdd(id=nameOutput, filename = paste("SDDloc_",nameOutput,"_Output.txt",sep=""), centre.xy=NULL, 
+                   calccentre=TRUE, weighted=FALSE, weights=NULL, points=coord, verbose=FALSE)
+          #Concatenar resultado
+          xDataSDDatt = rbind(xDataSDDatt, sddatt)
+          xDataSDDloc = rbind(xDataSDDloc, sddloc)
+          
+          #Cálculo BOX - Standard Deviation Box
+          calc_box(id=nameOutput, filename = paste("BOXloc_",nameOutput,"_Output.txt",sep=""), centre.xy=NULL, 
+                   calccentre=TRUE, weighted=FALSE, weights=NULL, points=coord, verbose=FALSE)
+          #Concatenar resultado
+          xDataBOXatt = rbind(xDataBOXatt, boxatt)
+          xDataBOXloc = rbind(xDataBOXloc, boxloc)
+        }else{
+          cont=cont+1
+        }
+        
       }
-      
+      msg = paste("Archivo ",idFile," - ",nrow(Y_W) - cont," semanas procesadas, ", cont," NO procesadas",sep = "")
+      print(msg)
+      writeLines(text = msg, con = con)
+      writeLines(text = as.character(Sys.time()), con = con)
+      #Volver al directorio por defecto
+      setwd(urlDefault)
+    }else{
+      msg = paste("Archivo ",idFile," - 0 semanas procesados",sep = "")
+      print(msg)
+      writeLines(text = msg, con = con)
     }
-    msg = paste("Archivo ",idFile," - ",nrow(Y_W) - cont," semanas procesadas, ", cont," NO procesadas",sep = "")
-    print(msg)
-    writeLines(text = msg, con = con)
-    writeLines(text = as.character(Sys.time()), con = con)
-    #Volver al directorio por defecto
-    setwd(urlDefault)
-  }else{
-    msg = paste("Archivo ",idFile," - 0 semanas procesados",sep = "")
-    print(msg)
-    writeLines(text = msg, con = con)
   }
 }
 
@@ -157,4 +162,4 @@ rm(sddloc)
 rm(sdeatt)
 rm(sdeloc)
 rm(dataFile)
-
+rm(dataPython)
