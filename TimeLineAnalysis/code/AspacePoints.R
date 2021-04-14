@@ -55,14 +55,13 @@ for(k in 0:160) {
   
   #Para filtrar los datos
   idFile = paste(rawName,k,sep = "")
-  fileRawData = paste(idFile,".RData",sep="")
   
   #Datos de cada persona
   dataFile = filter(dataPython, uid == idFile)
   
   #Obtener las semanas de cada año
   Y_W = dataFile %>% 
-    group_by(Y,W) %>% 
+    group_by(Y,M,W) %>% 
     summarise(numPoints = sum(contador)) %>%
     filter(numPoints >= 0)
   
@@ -79,8 +78,9 @@ for(k in 0:160) {
       
       #Variables de cada semana
       xYear = as.integer(Y_W[i,1])
-      xWeek = as.integer(Y_W[i,2])
-      xTotal = as.integer(Y_W[i,3])
+      xMonth = as.integer(Y_W[i,2])
+      xWeek = as.integer(Y_W[i,3])
+      xTotal = as.integer(Y_W[i,4])
       
       #Debe existir al menos 2 puntos para calcular ASPACE
       if(xTotal > 1){
@@ -93,7 +93,7 @@ for(k in 0:160) {
         coord = select(dataWeek, 3:4)
       
         #Cálculo SDE - Standard Deviation Ellipse      
-        nameOutput = paste(idFile,"-",xYear,"-",xWeek,"-",nrow(dataWeek),sep = "")
+        nameOutput = paste(idFile,"-",xYear,"-",xMonth,"-",xWeek,"-",xTotal,sep = "")
         calc_sde(id=nameOutput, filename = paste("SDEloc_",nameOutput,"_Output.txt",sep=""), centre.xy=NULL, 
                  calccentre=TRUE, weighted=FALSE, weights=NULL, points=coord, verbose=FALSE)
         
@@ -133,12 +133,12 @@ for(k in 0:160) {
 }
 
 #separar columnas
-xDataSDEatt = separate(xDataSDEatt, id, c("id","Y","W","samples"))
-xDataSDEloc = separate(xDataSDEloc, id, c("id","Y","W","samples"))
-xDataSDDatt = separate(xDataSDDatt, id, c("id","Y","W","samples"))
-xDataSDDloc = separate(xDataSDDloc, id, c("id","Y","W","samples"))
-xDataBOXatt = separate(xDataBOXatt, id, c("id","Y","W","samples"))
-xDataBOXloc = separate(xDataBOXloc, id, c("id","Y","W","samples"))
+xDataSDEatt = separate(xDataSDEatt, id, c("id","Y","M","W","samples"))
+xDataSDEloc = separate(xDataSDEloc, id, c("id","Y","M","W","samples"))
+xDataSDDatt = separate(xDataSDDatt, id, c("id","Y","M","W","samples"))
+xDataSDDloc = separate(xDataSDDloc, id, c("id","Y","M","W","samples"))
+xDataBOXatt = separate(xDataBOXatt, id, c("id","Y","M","W","samples"))
+xDataBOXloc = separate(xDataBOXloc, id, c("id","Y","M","W","samples"))
 
 #Cerramos conexión del archivo LOG
 close(con)
