@@ -1,0 +1,96 @@
+﻿id,res,UCE,Age,Gender,ResidenceLocation,OwnVehicle,UsualTravelPattern(LongDistance)
+tld99,Accept,Yes,22,Male,Valley,No,Public Transportation
+tld98,Accept,Yes,27,Male,North,No,Public Transportation
+tld97,Accept,Yes,24,Male,Other,Yes,Car
+tld95,Accept,Yes,23,Male,South,No,Public Transportation
+tld94,Accept,Yes,22,Male,Centre,No,Public Transportation
+tld93,Reject,Yes,21,Male,North,Yes,Car
+tld90,Accept,Yes,28,Male,North,No,Public Transportation
+tld89,Accept,No,44,Male,Valley,No,Public Transportation
+tld88,Accept,No,50,Female,North,No,Public Transportation
+tld87,Accept,No,44,Female,North,No,Public Transportation
+tld86,Reject,Yes,26,Female,South,No,Public Transportation
+tld85,Accept,Yes,25,Male,Valley,No,Public Transportation
+tld84,Reject,Yes,22,Male,Centre,No,Public Transportation
+tld83,Reject,Yes,27,Female,South,Yes,Public Transportation
+tld81,Accept,No,27,Female,South,No,Public Transportation
+tld80,Reject,Yes,30,Male,South,No,Public Transportation
+tld78,Accept,Yes,26,Female,South,Yes,Public Transportation
+tld77,Reject,Yes,24,Male,North,Yes,Public Transportation
+tld76,Accept,Yes,23,Male,North,No,Public Transportation
+tld75,Accept,Yes,2,Female,North,No,Public Transportation
+tld73,Accept,Yes,23,Female,Valley,No,Public Transportation
+tld72,Accept,Yes,21,Female,North,No,Public Transportation
+tld71,Accept,Yes,29,Male,South,Yes,Car
+tld69,Accept,Yes,23,Male,Valley,Yes,Car
+tld67,Accept,Yes,26,Male,South,Yes,Car
+tld66,Reject,Yes,30,Male,North,No,Public Transportation
+tld64,Reject,Yes,21,Male,Centre,No,Public Transportation
+tld63,Accept,No,30,Female,South,No,Public Transportation
+tld62,Reject,Yes,22,Female,South,No,Public Transportation
+tld61,Accept,Yes,31,Male,North,No,Public Transportation
+tld58,Reject,No,29,Male,South,No,Public Transportation
+tld56,Accept,Yes,21,Female,South,No,Public Transportation
+tld55,Reject,Yes,20,Male,South,No,Public Transportation
+tld54,Reject,Yes,26,Male,South,Yes,Car
+tld52,Accept,Yes,29,Male,North,No,Public Transportation
+tld50,Reject,Yes,27,Male,Centre,No,On foot
+tld49,Reject,Yes,21,Male,South,No,Public Transportation
+tld48,Accept,Yes,27,Female,Centre,No,Public Transportation
+tld46,Reject,Yes,22,Male,South,No,Public Transportation
+tld45,Accept,Yes,26,Female,Centre,No,Public Transportation
+tld39,Reject,Yes,25,Male,South,No,Public Transportation
+tld37,Reject,Yes,27,Female,South,No,Public Transportation
+tld28,Reject,Yes,21,Female,South,No,Public Transportation
+tld26,Reject,Yes,21,Female,North,No,Public Transportation
+tld25,Reject,Yes,21,Male,South,No,Public Transportation
+tld22,Reject,Yes,21,Male,Valley,Yes,Car
+tld21,Accept,Yes,23,Male,Valley,No,Public Transportation
+tld160,Accept,Yes,27,Female,North,No,Public Transportation
+tld159,Accept,No,40,Male,Valley,Yes,Car
+tld158,Accept,No,28,Male,South,No,Public Transportation
+tld157,Accept,Yes,22,Female,South,No,Public Transportation
+tld156,Reject,No,2,Female,South,No,Public Transportation
+tld154,Accept,Yes,26,Male,Valley,No,Public Transportation
+tld153,Accept,No,27,Male,North,Yes,Car
+tld151,Accept,Yes,28,Male,North,No,Public Transportation
+tld150,Accept,Yes,21,Female,South,Yes,Public Transportation
+tld149,Accept,Yes,26,Male,Valley,No,Public Transportation
+tld148,Accept,Yes,24,Female,North,No,Public Transportation
+tld147,Reject,No,26,Female,Centre,No,Public Transportation
+tld146,Reject,Yes,26,Male,Centre,No,Public Transportation
+tld145,Accept,Yes,27,Male,South,Yes,Car
+tld144,Accept,Yes,2,Male,Centre,No,Public Transportation
+tld143,Accept,No,44,Male,North,No,Public Transportation
+tld142,Accept,Yes,23,Male,North,No,Public Transportation
+tld141,Accept,No,29,Male,North,Yes,Public Transportation
+tld140,Accept,Yes,26,Male,Valley,No,Public Transportation
+tld14,Reject,Yes,21,Female,North,Yes,Public Transportation
+tld138,Accept,Yes,25,Male,South,No,Public Transportation
+tld136,Accept,Yes,21,Male,South,No,Public Transportation
+tld135,Accept,Yes,33,Female,North,Yes,Car
+tld134,Accept,No,27,Male,North,Yes,Car
+tld132,Accept,Yes,22,Male,South,No,Public Transportation
+tld131,Reject,Yes,20,Male,Centre,No,On foot
+tld130,Reject,Yes,2,Male,Centre,Yes,Car
+tld128,Accept,Yes,21,Male,North,No,Public Transportation
+tld126,Accept,Yes,26,Female,North,No,Public Transportation
+tld124,Accept,Yes,21,Male,Valley,No,Public Transportation
+tld123,Accept,Yes,30,Male,North,No,Public Transportation
+tld120,Accept,Yes,22,Male,Valley,No,Public Transportation
+tld119,Reject,Yes,23,Female,South,No,Public Transportation
+tld117,Reject,No,24,Male,North,No,Public Transportation
+tld116,Accept,Yes,29,Male,South,No,Public Transportation
+tld114,Accept,Yes,20,Male,South,No,Public Transportation
+tld111,Accept,Yes,23,Male,North,No,Public Transportation
+tld110,Accept,Yes,2,Male,South,No,Public Transportation
+tld109,Accept,Yes,24,Female,North,No,Public Transportation
+tld108,Reject,Yes,22,Female,North,Yes,Public Transportation
+tld106,Accept,Yes,28,Male,South,Yes,Car
+tld105,Accept,Yes,27,Female,Valley,No,Public Transportation
+tld104,Accept,Yes,21,Male,Valley,No,Public Transportation
+tld103,Accept,Yes,22,Male,North,No,Public Transportation
+tld102,Accept,Yes,28,Male,North,No,Public Transportation
+tld101,Accept,Yes,21,Male,Centre,No,Public Transportation
+tld100,Accept,Yes,22,Female,Centre,No,Public Transportation
+tld0,Reject,Yes,38,Male,North,Yes,Car
