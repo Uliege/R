@@ -1,4 +1,4 @@
-#Script para generar datos de SDE y SDD del paquete ASPACE desde los archivos CSV que vienen como resultado de la limpieza en python
+#Script para generar datos SDE, SDD y BOX del paquete ASPACE desde los archivos CSV que vienen como resultado de la limpieza en python
 
 library(aspace)
 library(stringr)
@@ -15,7 +15,6 @@ urlRawData = paste(urlDefault,"/rawdata/",sep = "")
 urlReports = paste(urlDefault,"/reports/",sep = "")
 urlOutput = paste(urlDefault,"/output/",sep = "")
 urlExcelData = paste(urlDefault,"/exceldata/",sep = "")
-
 
 #Archivo para almacenar el log de ejecución
 fileLog = paste("log",trimws(str_replace_all(as.character(Sys.time()),":","")),".txt", sep = "")
@@ -42,19 +41,16 @@ Y_W = NULL
 
 #Proceso repetitivo
 for(k in 0:160) {
+  #Cambiar aqui para procesar archivos individuales
   #k = 8
-  
   #Lectura de datos procesados en python
   #Para filtrar los datos
   idFile = paste(rawName,k,sep = "")
   excelFile = paste(urlExcelData,idFile,'.csv',sep="")
   
   if(file.exists(excelFile)){
-    
     dataPython = read.csv(excelFile)
-    
     dataPython$datetime <- ymd_hms(dataPython$datetime)
-    
     dataPython$Y = year(dataPython$datetime)
     dataPython$M = month(dataPython$datetime)
     dataPython$W = week(dataPython$datetime)
@@ -163,3 +159,14 @@ rm(sdeatt)
 rm(sdeloc)
 rm(dataFile)
 rm(dataPython)
+
+fileRawFinal = paste("aspace",trimws(str_replace_all(as.character(Sys.Date()),":","")),".RData",sep="")
+urlSaveRawData = paste(urlRawData,fileRawFinal,sep="")
+save(xDataBOXatt, xDataBOXloc, xDataSDDatt, xDataSDDloc, xDataSDEatt, xDataSDEloc,file=urlSaveRawData)
+
+fileRawFinal = paste("aspaceSDEx",trimws(str_replace_all(as.character(Sys.Date()),":","")),".RData",sep="")
+urlSaveRawData = paste(urlRawData,fileRawFinal,sep="")
+save(xDataSDEatt, xDataSDEloc,file=urlSaveRawData)
+
+shell("cls")
+print("Fin procesamiento... ")
