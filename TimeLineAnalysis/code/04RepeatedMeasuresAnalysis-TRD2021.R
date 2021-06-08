@@ -81,6 +81,8 @@ idPersons = xDataSDEatt %>%
   count(id, sort = TRUE) %>%
   filter(n>2)
 
+idPersons = idPersons[order(idPersons$id),]
+
 for(i in 1:nrow(idPersons)){
   #i=1
   xId = idPersons[i,1]
@@ -193,4 +195,61 @@ summary(mylogit)
 
 summary(mylogit)$coef
 
+
+#Fit the model
+
+library(tidyverse)
+library(caret)
+library(leaps)
+library(MASS)
+fit.model <- stepAIC(mylogit, direction = "both", trace = FALSE)
+summary(fit.model)
+
 #Fin del script....
+
+
+
+
+
+
+
+
+
+#Testing other models
+
+mylogit1 <- glm(resANOVA ~ UniversityStudent + Age + ResidenceLocation + OwnVehicle, 
+               data = xDataLogitModel, 
+               family = binomial)
+
+summary(mylogit1)
+
+
+mylogit2 <- glm(resANOVA ~ Age + ResidenceLocation + OwnVehicle, 
+                data = xDataLogitModel, 
+                family = binomial)
+
+summary(mylogit2)
+
+
+mylogit3 <- glm(resANOVA ~ Age + ResidenceLocation, 
+                data = xDataLogitModel, 
+                family = binomial)
+
+summary(mylogit3)
+
+
+
+mylogit4 <- glm(resANOVA ~ OwnVehicle + UsualTransportPattern, 
+               data = xDataLogitModel, 
+               family = binomial)
+
+summary(mylogit4)
+
+install.packages("AICcmodavg")
+library(AICcmodavg)
+
+models <- list(mylogit, mylogit1, mylogit2, mylogit3, mylogit4)
+
+model.names <- c('inicial', 'uno', 'dos', 'tres', 'cuatro')
+
+aictab(cand.set = models, modnames = model.names)
