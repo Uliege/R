@@ -26,7 +26,7 @@ urlReports = paste(urlProyecto,"/reports/",sep = "")
 urlShapeData = paste(urlProyecto,"/shapeData/",sep = "")
 urlLogs = paste(urlProyecto,"/logs/",sep = "")
 
-#Archivo para almacenar el log de ejecución (noProcWeeksrol cuando el script se ejecuta en un servidor)
+#Archivo para almacenar el log de ejecución (cuando el script se ejecuta en un servidor)
 fileLog = paste(urlLogs,"log",trimws(str_replace_all(as.character(Sys.time()),":","")),".txt", sep = "")
 #Conexión para escibir en el archivo
 con <- file(fileLog, open="a")
