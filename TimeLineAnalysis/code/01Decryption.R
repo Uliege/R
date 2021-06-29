@@ -40,7 +40,7 @@ lonRig = -78.270936
 #Proceso repetitivo
 #for(k in 0:160) {
 for(k in 161:269) {  
-  #k=161
+  k=0
   msg = k
   print(msg)
   writeLines(text = as.character(msg), con = con)
@@ -63,7 +63,7 @@ for(k in 161:269) {
     timestampMs <- as.numeric(dataFile$locations$timestampMs) #Almacena el número que reprsenta la fecha
     dateTimeLine <- as.POSIXct(timestampMs/1000, origin="1970-01-01") #Para mostrar la fecha con la hora
     
-    #location
+    #location (expressed in degreess decimals)
     latitude <- dataFile$locations$latitudeE7/1e7  #1e7 = 10000000 eje y coordenadas
     longitude <- dataFile$locations$longitudeE7/1e7 #1e7 = 10000000 eje x coordenadas
     
@@ -115,9 +115,6 @@ print("Fin procesamiento Historial de Ubicaciones... ")
 
 
 
-
-
-
 #Para procesar los registros de actividad - por separado por el tiempo de ejecución
 
 for(k in 161:269) {  
@@ -151,4 +148,102 @@ for(k in 161:269) {
     save(dataActivity, file=urlSaveRawData)
   }
 }
+
+
+
+
+
+#################################################
+#Para incluir los nuevos campos del data set
+################################################
+
+jsonName = "tld"
+
+# data de Quito
+latMin = -0.400294
+latMax =  0.026711
+lonLef = -78.591624
+lonRig = -78.270936
+
+for(k in 161:269) {  
+  k=0
+  msg = k
+  print(msg)
+  writeLines(text = as.character(msg), con = con)
+  #Proceso deserializar archivo JSON#
+  jsonNumber = k
+  fileJsonData = paste(jsonName,jsonNumber,".json",sep="")
+  dataFile <- cargar(urlJsonData,fileJsonData)
+  
+  if(length(dataFile$locations) == 0){
+    msg = paste("   El archivo ",k," no tiene información",sep = "")
+    print(msg)
+    writeLines(text = msg, con = con)
+  }else if(length(dataFile$locations) >= 9){
+    
+    ###############################################################################
+    #https://www.chipoglesby.com/2018/03/2018-analyzing-google-location-historyII/
+    #https://shiring.github.io/maps/2016/12/30/Standortverlauf_post
+    
+    #fecha
+    timestampMs <- as.numeric(dataFile$locations$timestampMs) #Almacena el número que reprsenta la fecha
+    dateTimeLine <- as.POSIXct(timestampMs/1000, origin="1970-01-01") #Para mostrar la fecha con la hora
+    dateTimeLineEc <- dateTimeLine - 5*60*60  
+    
+    
+    #location (expressed in degreess decimals)
+    latitude <- dataFile$locations$latitudeE7/1e7  #1e7 = 10000000 eje y coordenadas
+    longitude <- dataFile$locations$longitudeE7/1e7 #1e7 = 10000000 eje x coordenadas
+    
+    #precisión (m) - < 800 es alta y > 5000 es baja.
+    accuracy <- dataFile$locations$accuracy
+    
+    #altitud - en msnm
+    altitude <- dataFile$locations$altitude
+    
+    #precisión de la ubicación vertical del dispositivo (m)
+    verticalAccuracy <- dataFile$locations$verticalAccuracy
+    
+    #New fields
+    source <- dataFile$locations$source
+    deviceTag <- dataFile$locations$deviceTag
+    platform <- dataFile$locations$platform
+    platformType <- dataFile$locations$platformType
+    
+    #velocidad - m/s
+    velocity <- dataFile$locations$velocity
+    
+    #dirección en la que viaja el dispositivo.
+    heading <- dataFile$locations$heading
+    
+    #Creamos data frame con todos los datos
+    dataSource <- data.frame(dateTimeLine, dateTimeLineEc, latitude, longitude, accuracy, altitude, verticalAccuracy, 
+                             source, deviceTag, platform, platformType, velocity, heading)
+    
+    #Filtramos datos para UIO
+    dataQuito <- subset(dataSource, between(latitude,latMin,latMax))
+    dataQuito <- subset(dataQuito, between(longitude,lonLef,lonRig))
+    
+    #Guardamos dataSource, dataQuito y activities en Raw Data
+    #fileRawData = paste(jsonName,jsonNumber,".RData",sep="")
+    #urlSaveRawData = paste(urlRawData,fileRawData,sep="")
+    #save(dataSource, dataQuito, file=urlSaveRawData)
+    
+  }
+}
+
+
+dataQuito$source = as.factor(dataQuito$source)
+
+dataQuito$platform = as.factor(dataQuito$platform)
+
+dataQuito$platformType = as.factor(dataQuito$platformType)
+
+summary(dataQuito)
+
+dataGPS = filter(dataQuito, source == 'GPS')
+
+summary(dataGPS)
+
+
 
