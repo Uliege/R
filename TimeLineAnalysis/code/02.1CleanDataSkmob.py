@@ -27,12 +27,14 @@ urlDefault = 'D:\\G\\GitHub\\Uliege\\R\\TimeLineAnalysis'
 #Use this when script is in the same folder than other folders to export results
 #urlProject = os.getcwd()
 urlProject = urlDefault 
-urlRawData = urlProject + '\\rawdata\\'
-urlExcelData = urlProject + '\\exceldata\\'
+urlRawData = urlProject + '\\dataRaw\\'
+urlExcelData = urlProject + '\\dataExcel\\'
 urlLogs = urlProject + '\\logs\\'
 
+
+now = str(datetime.now()).replace(':', '')[0:17]
 #Name for log file
-nomFileLog = 'py-Clean.log'
+nomFileLog = 'py-Clean'+ now +'.log'
 
 #Create and configure log file
 if platform.platform().startswith('Windows'):
@@ -68,16 +70,20 @@ MIN_SPATIAL_RADIUS_KM_STOP = 0.2
 # MIN_STOP_RADIUS_FACTOR * MIN_SPATIAL_RADIUS_KM_STOP = 0.02 - 20 meters
 #Clusters
 MIN_SAMPLES_CLUSTER=1
+MIN_CLUSTER_RADIUS_KM = 0.05 #100 meters
 
 
 df_total_stops = pd.DataFrame()
 df_total_homes = pd.DataFrame()
 df_total_summary = pd.DataFrame()
 #Proceso repetitivo
+numFileInicio = 469
+numFileFin = 473
 #for k in range(0, 270):
-for k in range(174, 270):    
+#for k in range(174, 270): 
+for k in range(numFileInicio, numFileFin+1):    
   #Change here to process individual files  
-  #k = 174
+  k = 465
   idFile = rawName + str(k) + '.RData'
   urlFile = urlRawData + idFile
   fileObj = Path(urlFile)
@@ -107,7 +113,7 @@ for k in range(174, 270):
           print(msg)
           logging.info(msg)
           
-          #Validate the file contains at least 10 observations
+          #Validate the file contains at least 100 observations
           if len(df)>100:
               #Limpieza con scikit-mobility
               df_skmob = skmob.TrajDataFrame(df, datetime='datetime', longitude='lon', latitude='lat', user_id='idFile')
@@ -188,7 +194,6 @@ for k in range(174, 270):
               #Trips Summary
               df_traj_trips_summary = pd.DataFrame(columns=['idFile', 'idWeek', 'numWeek', 'idTrip', 'tripTimeMin', 'tripLenKm', 'tripPoints'])
               for numWeek in arrayWeeks:
-                  #print(numWeek)
                   #numWeek = '2019-06-24/2019-06-30'
                   df_consolidado = df_traj_trips[df_traj_trips['idWeek'] == numWeek]
                   arrayTrips = df_consolidado.idTrip.unique()
@@ -212,7 +217,7 @@ for k in range(174, 270):
                       df_traj_trips_summary = df_traj_trips_summary.append(trip_serie,ignore_index=True) 
                   
               #Stops - Activity Location
-              #Detect the stops for each individual in a TrajDataFrame (each Trajectory). 
+              #Detect the stops for each individual in a TrajDataFrame (each Trip in a Trajectory). 
               #A stop is detected when the individual spends at least `minutes_for_a_stop` minutes (5 minutes)
               #within a distance `stop_radius_factor * spatial_radius` km from a given trajectory point. 
               #The stop's coordinates are the median latitude and longitude values of the points found 
@@ -220,7 +225,7 @@ for k in range(174, 270):
               df_traj_trips_stops = pd.DataFrame()
               for numWeek in arrayWeeks:
                   df_traj_trips_tmp = df_traj_trips[df_traj_trips['idWeek'] == numWeek]
-                  df_traj_trips_tmp = skmob.TrajDataFrame(df_traj_trips_tmp, latitude='lat', longitude='long', datetime='timestamp', user_id='idFile')
+                  df_traj_trips_tmp = skmob.TrajDataFrame(df_traj_trips_tmp, latitude='lat', longitude='lng', datetime='timestamp', user_id='uid')
                   #df_traj_total_tmp = detection.stops(df_traj_total_tmp, stop_radius_factor=0.1, minutes_for_a_stop=5.0, spatial_radius_km=0.2, leaving_time=True)
                   df_traj_trips_tmp = detection.stops(df_traj_trips_tmp, minutes_for_a_stop=MIN_MINUTES_FOR_A_STOP, stop_radius_factor=MIN_STOP_RADIUS_FACTOR, spatial_radius_km=MIN_SPATIAL_RADIUS_KM_STOP, leaving_time=False)
                   if(len(df_traj_trips_tmp) > 0):
@@ -228,8 +233,12 @@ for k in range(174, 270):
               
               try:
                   #Clusters  
-                  df_traj_trips_stops = skmob.TrajDataFrame(df_traj_trips_stops, latitude='lat', longitude='long', datetime='datetime', user_id='uid')
-                  df_traj_trips_stops = clustering.cluster(df_traj_trips_stops, cluster_radius_km=MIN_SPATIAL_RADIUS_KM, min_samples=MIN_SAMPLES_CLUSTER)       
+                  #Cluster the stops of each individual in a TrajDataFrame. 
+                  #The stops correspond to visits to the same location at different times, based on spatial proximity. 
+                  #spatial proximity = 50 meters
+                  #The clustering algorithm used is DBSCAN.
+                  df_traj_trips_stops = skmob.TrajDataFrame(df_traj_trips_stops, latitude='lat', longitude='lng', datetime='datetime', user_id='uid')
+                  df_traj_trips_stops = clustering.cluster(df_traj_trips_stops, cluster_radius_km=MIN_CLUSTER_RADIUS_KM, min_samples=MIN_SAMPLES_CLUSTER)       
               except:
                   msg = 'Archivo ' + str(k) + ' Imposible calcular clusters'
                   print(msg)
@@ -238,13 +247,13 @@ for k in range(174, 270):
               
               #Exportar los datos de Stops, Home y Resumen de viajes del archivo k
               excelFile = rawName + str(k) + '.csv'
-              df_traj_trips_stops.to_csv(urlExcelData + excelFile, header=True)
+              df_traj_trips_stops.to_csv(urlExcelData + 'POI\\individual\\' + excelFile, header=True)
               
               excelFile = 'Home-' + rawName + str(k) + '.csv'
-              df_h.to_csv(urlExcelData + excelFile, header=True)
+              df_h.to_csv(urlExcelData + 'Home\\individual\\' + excelFile, header=True)
               
               excelFile = 'Trips-' + rawName + str(k) + '.csv'
-              df_traj_trips_summary.to_csv(urlExcelData + excelFile, header=True)
+              df_traj_trips_summary.to_csv(urlExcelData + 'Trip\\individual\\' + excelFile, header=True)
               
               #Unir todo en un solo DataFrame
               df_total_stops = df_total_stops.append(df_traj_trips_stops)
@@ -267,10 +276,11 @@ for k in range(174, 270):
        logging.warning(msg)
 
 #Exportar todos los datos
-df_total_stops.to_csv(urlExcelData + 'tldTotal.csv')
-df_total_homes.to_csv(urlExcelData + 'Home-tldTotal.csv')
-df_total_summary.to_csv(urlExcelData + 'Trips-tldTotal.csv')
+df_total_stops.to_csv(urlExcelData + 'POI\\' + 'tldTotal '+ str(numFileInicio) + '-' + str(numFileFin) + '.csv')
+df_total_homes.to_csv(urlExcelData + 'Home\\' + 'Home-tldTotal '+ str(numFileInicio) + '-' + str(numFileFin) + '.csv')
+df_total_summary.to_csv(urlExcelData + 'Trip\\' + 'Trips-tldTotal '+ str(numFileInicio) + '-' + str(numFileFin) + '.csv')
 
 msg = "Fin del proceso.........."
 print(msg)
 logging.debug(msg)
+logging.shutdown()
